@@ -26,6 +26,7 @@ module.exports = function nor_array_prototype(a_) {
 	 */
 	ArrayUtils.prototype.forEach = function forEach(c) {
 		var i = 0, l = a.length;
+		/*jshint plusplus:false, curly:false */
 		while(i < l) c(a[i], i++, a);
 		return this;
 	};

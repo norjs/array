@@ -16,6 +16,7 @@ function ArrayUtils(a) {
  */
 ArrayUtils.prototype.forEach = function forEach(c) {
 	var i = 0, a=this.a, l=a.length;
+	/*jshint plusplus:false, curly:false */
 	while(i < l) c(a[i], i++, a);
 	return this;
 };
