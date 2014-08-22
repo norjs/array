@@ -139,6 +139,15 @@ module.exports = function nor_array_obj(a_) {
 		return a.join(s);
 	};
 
+	/**
+	 * @param e {mixed} The element to search
+	 * @param from {number} The index to start the search 
+	 * @returns {number} The index of the element
+	 */
+	utils.reduce = function nor_array_reduce() {
+		return a.reduce.apply(a, arguments);
+	};
+
 	// Export it
 	return utils;
 };
