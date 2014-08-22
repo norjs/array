@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/Sendanor/nor-array.png?branch=master)](http://travis-ci.org/Sendanor/nor-array)
+
 nor-array
 =========
 
@@ -26,4 +28,4 @@ Our implementation is about 50% faster than the standard `Array.prototype.forEac
 License
 -------
 
-The MIT style license, see LICENSE file.
+The MIT style license, see [LICENSE](https://raw.githubusercontent.com/sendanor/nor-array/master/LICENSE).
