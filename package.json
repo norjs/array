@@ -30,9 +30,11 @@
     "url": "https://github.com/sendanor/nor-array/issues"
   },
   "devDependencies": {
-    "lint"         : "*",
-    "jshint"       : "*",
     "mocha"        : "*"
+  },
+  "optionalDependencies": {
+    "lint"         : "*",
+    "jshint"       : "*"
   },
   "homepage": "https://github.com/sendanor/nor-array"
 }
