@@ -7,7 +7,7 @@ var assert = require("assert");
 var ARR = require('nor-array');
 
 /** The amount of loops done for performance tests */
-var test_loops = parseInt( process.env.TEST_LOOPS || 2000000, 10);
+var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
 
 /** Runs callback `loops` times and calculates the total time
  * @param loops {integer} The amount of loops
