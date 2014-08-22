@@ -7,7 +7,7 @@ var assert = require("assert");
 var ARR = require('nor-array');
 
 /** The amount of loops done for performance tests */
-var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
+var test_loops = parseInt( process.env.TEST_LOOPS || 2000000, 10);
 
 /** Runs callback `loops` times and calculates the total time
  * @param loops {integer} The amount of loops
@@ -55,6 +55,7 @@ describe('nor-array', function(){
 
 			var a = [1, 2, 3, 4];
 
+			// Standard implementation
 			var std_time = time_test(test_loops, function() {
 				var b = [];
 				a.forEach(function(v) {
@@ -63,6 +64,7 @@ describe('nor-array', function(){
 				assert( a.length === b.length );
 			});
 
+			// Our implementation
 			var A = ARR(a);
 			var our_time = time_test(test_loops, function() {
 				var b = [];
@@ -72,12 +74,40 @@ describe('nor-array', function(){
 				assert( a.length === b.length );
 			});
 
+			// Raw implementation
+			var raw_time = time_test(test_loops, function() {
+				var b = [];
+				var i = 0;
+				for(; i<a.length; i+=1) {
+					b.push(a[i]);
+				}
+				assert( a.length === b.length );
+			});
+
+			// Check results
+
+			// Our vs standard
 			if(our_time < std_time) {
-				console.log('Our forEach() was ' + Math.round( (std_time-our_time)/std_time * 100) + '% faster! [' + our_time+'/'+std_time+']');
+				console.log('Our forEach() was ' + Math.round( (std_time-our_time)/std_time * 100) + '% faster than standard! [' + our_time+'/'+std_time+']');
 			} else {
-				console.log('Standard forEach() was ' + Math.round( (our_time-std_time)/our_time * 100) + '% faster! [' + our_time+'/'+std_time+']');
+				console.log('Standard forEach() was ' + Math.round( (our_time-std_time)/our_time * 100) + '% faster than our! [' + our_time+'/'+std_time+']');
 			}
 
+			// Raw vs standard
+			if(raw_time < std_time) {
+				console.log('Raw forEach() was ' + Math.round( (std_time-raw_time)/std_time * 100) + '% faster than standard! [' + raw_time+'/'+std_time+']');
+			} else {
+				console.log('Standard forEach() was ' + Math.round( (raw_time-std_time)/raw_time * 100) + '% faster than raw! [' + raw_time+'/'+std_time+']');
+			}
+
+			// Our vs raw
+			if(our_time < raw_time) {
+				console.log('Our forEach() was ' + Math.round( (raw_time-our_time)/raw_time * 100) + '% faster than raw! [' + our_time+'/'+raw_time+']');
+			} else {
+				console.log('Raw forEach() was ' + Math.round( (our_time-raw_time)/our_time * 100) + '% faster than our! [' + our_time+'/'+raw_time+']');
+			}
+
+			// Asserts
 			assert(our_time < std_time);
 
 		});
