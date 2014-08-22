@@ -23,7 +23,7 @@ ARR(a).forEach(function(v) {
 });
 ```
 
-Our implementation is about 50% faster than the standard `Array.prototype.forEach()`.
+Our implementation is [about 50% faster than the standard `Array.prototype.forEach()`](https://travis-ci.org/sendanor/nor-array/builds/33259661).
 
 License
 -------
