@@ -18,6 +18,7 @@ module.exports = function nor_array_obj(a_) {
 	var utils = {};
 
 	/** The forEach implementation
+	 * Our implementation does not have implementation for `thisArg` because it would affect the performance and you can always use `o.f.bind(o)`.
 	 * @param c {function} The callback which will be executed for each element in the array
 	 */
 	utils.forEach = function forEach(c) {

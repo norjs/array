@@ -11,6 +11,7 @@ function ArrayUtils(a) {
 }
 
 /** The forEach implementation
+ * Our implementation does not have implementation for `thisArg` because it would affect the performance and you can always use `o.f.bind(o)`.
  * @param c {function} The callback which will be executed for each element in the array
  */
 ArrayUtils.prototype.forEach = function forEach(c) {
