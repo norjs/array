@@ -4,10 +4,14 @@
  */
 
 var assert = require("assert");
-var ARR = require('nor-array');
 
 /** The amount of loops done for performance tests */
 var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
+
+var IMPL = process.env.TEST_ARRAY_IMPL || 'object';
+
+// Exports
+var ARR = require('nor-array/impls/' + IMPL );
 
 /** Runs callback `loops` times and calculates the total time
  * @param loops {integer} The amount of loops
@@ -53,6 +57,8 @@ describe('nor-array', function(){
 		/** Test performance */
 		it('is faster than standard forEach', function(){
 
+			this.timeout(120000);
+
 			var a = [1, 2, 3, 4];
 
 			// Standard implementation
@@ -77,14 +83,25 @@ describe('nor-array', function(){
 			// Raw implementation
 			var raw_time = time_test(test_loops, function() {
 				var b = [];
-				var i = 0;
-				for(; i<a.length; i+=1) {
+				var i = 0, ll = a.length;
+				while(i<ll) {
 					b.push(a[i]);
+					i += 1;
 				}
 				assert( a.length === b.length );
 			});
 
 			// Check results
+			var rows = [
+				['Implementation', 'test', 'ms/100k calls', 'total time', 'calls'],
+				[IMPL, 'std', (std_time/test_loops*100000), std_time, test_loops ],
+				[IMPL, 'our', (our_time/test_loops*100000), our_time, test_loops ],
+				[IMPL, 'raw', (raw_time/test_loops*100000), raw_time, test_loops ]
+			];
+
+			rows.forEach(function(r) {
+				console.log( r.map(function(c) { return '"' + c + '"'; }).join(',') );
+			});
 
 			// Our vs standard
 			if(our_time < std_time) {
