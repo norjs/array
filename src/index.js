@@ -6,6 +6,6 @@
 "use strict";
 
 // Exports
-module.exports = require('./impls/object.js');
+module.exports = require('./impls/rev-object.js');
 
 /* EOF */
