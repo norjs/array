@@ -1,4 +1,4 @@
-/*
+/**
  * nor-array -- Array Utility Library
  * Copyright 2014 Jaakko-Heikki Heusala <jheusala@iki.fi>
  */
@@ -21,11 +21,10 @@ module.exports = function nor_array_obj(a_) {
 	 * @param c {function} The callback which will be executed for each element in the array
 	 */
 	utils.forEach = function forEach(c) {
-		var l = a.length, i = l - 1, ii;
+		var l = a.length-1, i = l, ii = 0;
 		while(i >= 0) {
-			ii = l-i-1;
+			ii = l-(i--);
 			c(a[ii], ii, a);
-			i -= 1;
 		}
 		return utils;
 	};

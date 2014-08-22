@@ -1,4 +1,4 @@
-/*
+/**
  * nor-array -- Array Utility Library
  * Copyright 2014 Jaakko-Heikki Heusala <jheusala@iki.fi>
  */
@@ -22,15 +22,12 @@ module.exports = function nor_array_obj(a_) {
 	 */
 	utils.forEach = function forEach(c) {
 		var i = 0, l = a.length;
-		while(i < l) {
-			c(a[i], i, a);
-			i += 1;
-		}
+		while(i < l) c(a[i], i++, a);
 		return utils;
 	};
 
 	// Export it
 	return utils;
-}
+};
 
 /* EOF */

@@ -5,6 +5,8 @@
 
 var assert = require("assert");
 
+var TIMEOUT = parseInt( process.env.TEST_TIMEOUT || 15*60000, 10);
+
 /** The amount of loops done for performance tests */
 var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
 
@@ -57,7 +59,7 @@ describe('nor-array', function(){
 		/** Test performance */
 		it('is faster than standard forEach', function(){
 
-			this.timeout(120000);
+			this.timeout(TIMEOUT);
 
 			var a = [1, 2, 3, 4];
 

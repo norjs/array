@@ -1,4 +1,4 @@
-/*
+/**
  * nor-array -- Array Utility Library
  * Copyright 2014 Jaakko-Heikki Heusala <jheusala@iki.fi>
  */
@@ -15,10 +15,7 @@ function ArrayUtils(a) {
  */
 ArrayUtils.prototype.forEach = function forEach(c) {
 	var i = 0, a=this.a, l=a.length;
-	while(i < l) {
-		c(a[i], i, a);
-		i += 1;
-	}
+	while(i < l) c(a[i], i++, a);
 	return this;
 };
 
