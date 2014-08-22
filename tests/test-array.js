@@ -10,7 +10,7 @@ var TIMEOUT = parseInt( process.env.TEST_TIMEOUT || 15*60000, 10);
 /** The amount of loops done for performance tests */
 var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
 
-var IMPL = process.env.TEST_ARRAY_IMPL || 'rev-object';
+var IMPL = process.env.TEST_ARRAY_IMPL || 'index';
 
 // Exports
 var ARR = require('nor-array/impls/' + IMPL );
