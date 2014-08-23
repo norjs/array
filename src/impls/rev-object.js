@@ -14,7 +14,9 @@
  * @param a {array} The array to operate.
  */
 module.exports = function nor_array_obj(a_) {
+
 	var a = arguments.length === 0 ? [] : a_;
+
 	var utils = {};
 
 	/** Returns the internal array value */
@@ -24,6 +26,7 @@ module.exports = function nor_array_obj(a_) {
 
 	/** The forEach implementation
 	 * @param c {function} The callback which will be executed for each element in the array
+	 * @todo Test performance
 	 */
 	utils.forEach = function nor_array_forEach(c) {
 		var l = a.length-1, i = l, ii = 0;
@@ -37,6 +40,7 @@ module.exports = function nor_array_obj(a_) {
 
 	/** The map implementation
 	 * @param c {function} The callback which will be executed for each element in the array
+	 * @todo Test performance
 	 */
 	utils.map = function nor_array_map(c) {
 		var a2 = new Array(a.length);
@@ -52,6 +56,7 @@ module.exports = function nor_array_obj(a_) {
 	/** The filter() method creates new array with all the elements that pass the test implemented by the provided function.
 	 * @param c {function} The callback which will be executed for each element in the array
 	 * @returns {object} The nor-array object instance with value of results as its internal value.
+	 * @todo Test performance
 	 */
 	utils.filter = function nor_array_filter(c) {
 		var a2 = new Array(a.length);
@@ -70,6 +75,7 @@ module.exports = function nor_array_obj(a_) {
 	/** The every() method tests every element in an array with provided callback function.
 	 * @param c {function} The callback which will be executed for each element in the array
 	 * @returns {boolean} True if each array element passes the test.
+	 * @todo Test performance
 	 */
 	utils.every = function nor_array_every(c) {
 		var l = a.length-1, i = l, ii = 0;
@@ -86,6 +92,7 @@ module.exports = function nor_array_obj(a_) {
 	/** The some() method tests if some elements in an array with provided callback function returns true
 	 * @param c {function} The callback which will be executed for each element in the array
 	 * @returns {boolean} True if each array element passes the test.
+	 * @todo Test performance
 	 */
 	utils.some = function nor_array_some(c) {
 		var l = a.length-1, i = l, ii = 0;
@@ -101,6 +108,7 @@ module.exports = function nor_array_obj(a_) {
 
 	/** The concat() implementation. Currently this is using the standard implementation until better is implemented.
 	 * @param c {function} The callback which will be executed for each element in the array
+	 * @todo Test performance
 	 */
 	utils.concat = function() {
 		return nor_array_obj(a.concat.apply(a, arguments));
@@ -110,35 +118,28 @@ module.exports = function nor_array_obj(a_) {
 	 * @param e {mixed} The element to search
 	 * @param from {number} The index to start the search 
 	 * @returns {number} The index of the element
+	 * @todo Test performance
 	 */
-	utils.indexOf = function nor_array_indexOf() {
-		return a.indexOf.apply(a, arguments);
+	utils.indexOf = function nor_array_indexOf(e, f) {
+		return (arguments.length === 1) ? a.indexOf(e) ? a.indexOf(e, f);
 	};
 
 	/** 
 	 * @param e {mixed} The element to search
 	 * @param from {number} The index to start the search 
 	 * @returns {number} The index of the element
+	 * @todo Test performance
 	 */
-	utils.lastIndexOf = function nor_array_lastIndexOf() {
-		return a.lastIndexOf.apply(a, arguments);
+	utils.lastIndexOf = function nor_array_lastIndexOf(e, f) {
+		return (arguments.length === 1) ? a.lastIndexOf(e) : a.lastIndexOf(e, f);
 	};
 
-	/** 
-	 * @param e {mixed} The element to search
-	 * @param from {number} The index to start the search 
-	 * @returns {number} The index of the element
+	/** Direct call seems to be fastest: http://jsperf.com/testing-join-algorithms-reverse-vs-forward
+	 * @params s {string} 
+	 * @returns {string} 
 	 */
-	utils.join = function nor_array_join(s_) {
-		var t = '',
-		    s = (arguments.length === 0) ? ',' : ''+s_,
-		    l = a.length-1,
-		    i = l;
-		/*jshint plusplus:false, curly:false */
-		if(i < 0) return t;
-		t += a[l-(i--)];
-		while(i >= 0) t += s + a[l-(i--)];
-		return t;
+	utils.join = function nor_array_join(s) {
+		return a.join(s);
 	};
 
 	// Export it

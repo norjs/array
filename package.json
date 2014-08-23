@@ -34,7 +34,9 @@
   },
   "optionalDependencies": {
     "lint"         : "*",
-    "jshint"       : "*"
+    "jshint"       : "*",
+	"benchmark"    : "*",
+	"microtime"    : "*"
   },
   "homepage": "https://github.com/sendanor/nor-array"
 }
