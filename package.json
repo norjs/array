@@ -1,6 +1,6 @@
 {
   "name": "nor-array",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Optimized Array Utility Library",
   "main": "src/index.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "test-progress": "mocha -u bdd -c -R progress tests/test-*.js",
     "test-min": "mocha -u bdd -c -R min tests/test-*.js",
     "test-markdown": "mocha -u bdd -c -R markdown tests/test-*.js",
-	"lint": "node-lint src/ --config=lint.json",
-	"jshint": "jshint src/"
+    "lint": "node-lint src/ --config=lint.json",
+    "jshint": "jshint src/"
   },
   "repository": {
     "type": "git",
@@ -35,8 +35,8 @@
   "optionalDependencies": {
     "lint"         : "*",
     "jshint"       : "*",
-	"benchmark"    : "*",
-	"microtime"    : "*"
+    "benchmark"    : "*",
+    "microtime"    : "*"
   },
   "homepage": "https://github.com/sendanor/nor-array"
 }
