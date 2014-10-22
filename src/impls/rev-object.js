@@ -121,7 +121,7 @@ module.exports = function nor_array_obj(a_) {
 	 * @todo Test performance
 	 */
 	utils.indexOf = function nor_array_indexOf(e, f) {
-		return (arguments.length === 1) ? a.indexOf(e) ? a.indexOf(e, f);
+		return (arguments.length === 1) ? a.indexOf(e) : a.indexOf(e, f);
 	};
 
 	/** 

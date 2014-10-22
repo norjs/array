@@ -6,7 +6,7 @@
 "use strict";
 
 /** Reverse implementation. Warning! This seems to be slower than `Array.prototype.join()`! */
-module.exports = function nor_array_join(s_) {
+module.exports = function nor_array_join(a, s_) {
 	var t = '',
 	    s = (arguments.length === 0) ? ',' : ''+s_,
 	    l = a.length-1,
