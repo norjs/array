@@ -1,6 +1,6 @@
 {
   "name": "nor-array",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Optimized Array Utility Library",
   "main": "src/index.js",
   "scripts": {
@@ -28,6 +28,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sendanor/nor-array/issues"
+  },
+  "dependencies": {
+    "nor-function" : ">= 0.1.5 < 0.2.0"
   },
   "devDependencies": {
     "mocha"        : "*"
