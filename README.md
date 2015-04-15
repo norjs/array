@@ -45,3 +45,8 @@ License
 -------
 
 The MIT style license, see [LICENSE](https://raw.githubusercontent.com/sendanor/nor-array/master/LICENSE).
+
+Commercial Support
+------------------
+
+You can buy commercial support from [Sendanor](http://sendanor.com/software).
