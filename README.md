@@ -10,8 +10,8 @@ Installation
 
 Install using NPM: `npm install nor-array`
 
-Example code
-------------
+Example Usage
+-------------
 
 ```
 var ARR = require('nor-array');
@@ -26,18 +26,18 @@ ARR(a).forEach(function(v) {
 Our implementation is [about 50% faster than the standard 
 `Array.prototype.forEach()`](https://travis-ci.org/sendanor/nor-array/builds/33259661).
 
-Compatibility with `Array.prototype.forEach()`
-----------------------------------------------
+Compatibility with standard `Array` methods 
+-------------------------------------------
 
-Our implementation is ***not*** compatible with ECMAScript 
-implementation of `Array.prototype.forEach()`.
+Our implementations are ***not*** fully compatible with ECMAScript 
+implementations of `Array` operations.
 
-Most notably because it:
+Most notably because our implementation expects:
 
-* Array is dense (NOT sparse) -- There must be no holes!
+* Array is a dense (NOT sparse -- there must be no holes!)
 * Assumes that indexes are between zero (0) and `array.length`: `0 <= i < array.length`
-* It does not support `thisArg`, call `o.callback.bind(o)` instead
-* The array indexes do not change while our `forEach()` is running
+* Does not support `thisArg`, call `o.callback.bind(o)` instead
+* The array indexes do not change while our `.forEach()` is running
 
 This assumption is the reason why it is faster.
 
