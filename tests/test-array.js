@@ -255,6 +255,52 @@ describe('nor-array', function(){
 
 	}); // #some
 
+	/** Tests for nor-array(a).find() */
+	describe('#find', function(){
+
+		/** Normal test */
+		it('can find elements', function(){
+			var a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+
+			assert.strictEqual( a.length, 32 );
+			for(var i=0; i<32; i++) {
+				assert.strictEqual( a[i], i );
+			}
+
+			var b;
+
+			b = ARR(a).find(function(v) { return v >= 16; });
+			assert.strictEqual( a.length, 32 );
+			assert.strictEqual( b, 16 );
+
+			b = ARR(a).find(function(v) { return v >= 100; });
+			assert.strictEqual( a.length, 32 );
+			assert.strictEqual( b, undefined );
+
+		});
+
+	}); // #find
+
+	/** Tests for nor-array(a).findIndex() */
+	describe('#findIndex', function(){
+
+		/** Normal test */
+		it('can find index of elements', function(){
+			var a = [-4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+			var b;
+
+			b = ARR(a).findIndex(function(v) { return v >= 16; });
+			assert.strictEqual( a.length, 32+4 );
+			assert.strictEqual( b, 20 );
+
+			b = ARR(a).findIndex(function(v) { return v >= 100; });
+			assert.strictEqual( a.length, 32+4 );
+			assert.strictEqual( b, -1 );
+
+		});
+
+	}); // #findIndex
+
 	/** Tests for nor-array(a).concat() */
 	describe('#concat', function(){
 
