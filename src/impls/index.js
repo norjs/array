@@ -80,6 +80,41 @@ NorArray.prototype.filter = function nor_array_filter(c) {
 	return nor_array_obj(a2);
 };
 
+/** The `find()` method returns a value in the array, if an element in the array 
+ * satisfies the provided testing function. Otherwise `undefined` is returned.
+ * @param c {function} The callback which will be executed for each element in the array
+ * @returns {boolean} True if each array element passes the test.
+ */
+NorArray.prototype.find = function nor_array_find(c) {
+	var a = this.a;
+	var l = a.length-1, i = l, ii = 0;
+	while(i >= 0) {
+		/*jshint plusplus:false*/
+		ii = l-(i--);
+		if(c(a[ii], ii, a)) {
+			return a[ii];
+		}
+	}
+};
+
+/** The `findIndex()` method returns an index in the array, if an element in the array 
+ * satisfies the provided testing function. Otherwise `-1` is returned.
+ * @param c {function} The callback which will be executed for each element in the array
+ * @returns {boolean} True if each array element passes the test.
+ */
+NorArray.prototype.findIndex = function nor_array_find(c) {
+	var a = this.a;
+	var l = a.length-1, i = l, ii = 0;
+	while(i >= 0) {
+		/*jshint plusplus:false*/
+		ii = l-(i--);
+		if(c(a[ii], ii, a)) {
+			return ii;
+		}
+	}
+	return -1;
+};
+
 /** The every() method tests every element in an array with provided callback function.
  * @param c {function} The callback which will be executed for each element in the array
  * @returns {boolean} True if each array element passes the test.
