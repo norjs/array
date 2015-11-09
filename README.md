@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/Sendanor/nor-array.png?branch=master)](http://travis-ci.org/Sendanor/nor-array)
+[![Build Status](https://secure.travis-ci.org/sendanor/nor-array.png?branch=master)](http://travis-ci.org/sendanor/nor-array)
 
 nor-array
 =========
