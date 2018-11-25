@@ -1,6 +1,6 @@
 {
   "name": "nor-array",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Optimized Array Utility Library",
   "main": "src/index.js",
   "scripts": {
@@ -30,16 +30,14 @@
     "url": "https://github.com/sendanor/nor-array/issues"
   },
   "dependencies": {
-    "nor-function" : "^0.1.7"
+    "nor-function": "^1.0.1"
   },
   "devDependencies": {
-    "mocha"        : "^2.5.3"
-  },
-  "optionalDependencies": {
-    "lint"         : "^1.1.2",
-    "jshint"       : "^2.9.2",
-    "benchmark"    : "^2.1.1",
-    "microtime"    : "^2.1.1"
+    "mocha": "^5.2.0",
+    "lint": "^1.1.2",
+    "jshint": "^2.9.2",
+    "benchmark": "^2.1.1",
+    "microtime": "^2.1.1"
   },
   "homepage": "https://github.com/sendanor/nor-array"
 }
