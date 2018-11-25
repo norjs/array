@@ -13,7 +13,7 @@ var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
 var IMPL = process.env.TEST_ARRAY_IMPL || 'index';
 
 // Exports
-var ARR = require('nor-array/impls/' + IMPL );
+var ARR = require('../src/impls/' + IMPL );
 
 /** Runs callback `loops` times and calculates the total time
  * @param loops {integer} The amount of loops
