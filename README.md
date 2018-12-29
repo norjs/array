@@ -1,9 +1,9 @@
-[![Build Status](https://secure.travis-ci.org/sendanor/nor-array.png?branch=master)](http://travis-ci.org/sendanor/nor-array)
+[![Build Status](https://secure.travis-ci.org/norjs/array.png?branch=master)](http://travis-ci.org/norjs/array)
 
-nor-array
-=========
+@norjs/array
+============
 
-Optimized Array Utility Library
+Optimized Array Utility Library.
 
 Installation
 ------------
@@ -23,7 +23,7 @@ ARR(a).forEach(function(v) {
 });
 ```
 
-Our implementation is [about 50% faster than the standard 
+Our implementation ~~is~~ was [about 50% faster than the standard 
 `Array.prototype.forEach()`](https://travis-ci.org/sendanor/nor-array/builds/33259661).
 
 Compatibility with standard `Array` methods 
@@ -34,12 +34,12 @@ implementations of `Array` operations.
 
 Most notably because our implementation expects:
 
-* Array is a dense (NOT sparse -- there must be no holes!)
-* Assumes that indexes are between zero (0) and `array.length`: `0 <= i < array.length`
-* Does not support `thisArg`, call `o.callback.bind(o)` instead
-* The array indexes do not change while our `.forEach()` is running
+ * Array is a dense (NOT sparse -- there must be no holes!)
+ * Assumes that indexes are between zero (0) and `array.length`: `0 <= i < array.length`
+ * Does not support `thisArg`, call `o.callback.bind(o)` instead
+ * The array indexes do not change while our `.forEach()` is running
 
-This assumption is the reason why it is faster.
+*This assumption is the reason why it is faster.*
 
 Function Reference
 ------------------
@@ -63,9 +63,9 @@ Function Reference
 License
 -------
 
-The MIT style license, see [LICENSE](https://raw.githubusercontent.com/sendanor/nor-array/master/LICENSE).
+The MIT style license, see [LICENSE](https://raw.githubusercontent.com/norjs/array/master/LICENSE).
 
 Commercial Support
 ------------------
 
-You can buy commercial support from [Sendanor](http://sendanor.com/software).
+You can buy commercial support from [Sendanor](http://sendanor.com/).

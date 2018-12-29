@@ -6,13 +6,179 @@
  *
  */
 
-"use strict";
+/**
+ *
+ */
+export class NorArray {
 
-var FUNCTION = require('nor-function');
+	/** Our array constructor */
+	constructor (a = []) {
+		this.a = a;
+	}
 
-/** Our array constructor */
-function NorArray(a_) {
-	this.a = arguments.length === 0 ? [] : a_;
+	/** Returns the internal array value */
+	valueOf () {
+		return this.a;
+	}
+
+	/** The forEach implementation
+	 * @param c {function} The callback which will be executed for each element in the array
+	 */
+	forEach (c) {
+		let a = this.a;
+		let l = a.length-1, i = l, ii = 0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			c(a[ii], ii, a);
+		}
+		return this;
+	}
+
+	/** The map implementation
+	 * @param c {function} The callback which will be executed for each element in the array
+	 */
+	map (c) {
+		let a = this.a;
+		let a2 = new Array(a.length);
+		let l = a.length-1, i = l, ii = 0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			a2[ii] = c(a[ii], ii, a);
+		}
+		return NorArray.create(a2);
+	}
+
+	/** The filter() method creates new array with all the elements that pass the test implemented by the provided function.
+	 * @param c {function} The callback which will be executed for each element in the array
+	 * @returns {object} The nor-array object instance with value of results as its internal value.
+	 */
+	filter (c) {
+		let a = this.a;
+		let a2 = new Array(a.length);
+		let l = a.length-1, i = l, ii = 0, n=0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			if (c(a[ii], ii, a)) {
+				a2[n++] = a[ii];
+			}
+		}
+		a2.length = n;
+		return NorArray.create(a2);
+	}
+
+	/** The `find()` method returns a value in the array, if an element in the array
+	 * satisfies the provided testing function. Otherwise `undefined` is returned.
+	 * @param c {function} The callback which will be executed for each element in the array
+	 * @returns {boolean} True if each array element passes the test.
+	 */
+	find (c) {
+		let a = this.a;
+		let l = a.length-1, i = l, ii = 0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			if (c(a[ii], ii, a)) {
+				return a[ii];
+			}
+		}
+	}
+
+	/** The `findIndex()` method returns an index in the array, if an element in the array
+	 * satisfies the provided testing function. Otherwise `-1` is returned.
+	 *
+	 * @param c {function} The callback which will be executed for each element in the array until index is found.
+	 * @returns {number}
+	 */
+	findIndex (c) {
+		let a = this.a;
+		let l = a.length-1, i = l, ii = 0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			if (c(a[ii], ii, a)) {
+				return ii;
+			}
+		}
+		return -1;
+	}
+
+	/** The every() method tests every element in an array with provided callback function.
+	 * @param c {function} The callback which will be executed for each element in the array
+	 * @returns {boolean} True if each array element passes the test.
+	 */
+	every (c) {
+		let a = this.a;
+		let l = a.length-1, i = l, ii = 0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			if (!c(a[ii], ii, a)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/** The some() method tests if some elements in an array with provided callback function returns true
+	 * @param c {function} The callback which will be executed for each element in the array
+	 * @returns {boolean} True if each array element passes the test.
+	 */
+	some (c) {
+		let a = this.a;
+		let l = a.length-1, i = l, ii = 0;
+		while (i >= 0) {
+			/*jshint plusplus:false*/
+			ii = l-(i--);
+			if (c(a[ii], ii, a)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** The .concat() implementation. Currently this is using the standard implementation until better is implemented.
+	 */
+	concat (...args) {
+		return NorArray.create( this.a.concat(...args) );
+	}
+
+	/**
+	 * @returns {number} The index of the element
+	 */
+	indexOf (...args) {
+		return this.a.indexOf(...args);
+	}
+
+	/**
+	 */
+	lastIndexOf (...args) {
+		return this.a.lastIndexOf(...args);
+	}
+
+	/**
+	 * @param s {string}
+	 */
+	join (s = ',') {
+		return this.a.join(s);
+	}
+
+	/**
+	 */
+	reduce (...args) {
+		return this.a.reduce(...args);
+	}
+
+	/**
+	 *
+	 * @param a {Array}
+	 * @returns {NorArray}
+	 */
+	static create (a) {
+		return new NorArray(a);
+	}
 }
 
 /**
@@ -23,181 +189,6 @@ function NorArray(a_) {
  *
  * @param a {array} The array to operate.
  */
-var nor_array_obj = module.exports = function nor_array_obj(a_) {
-	return new NorArray(a_);
+export default function nor_array_create (a) {
+	return NorArray.create(a);
 };
-
-/** Returns the internal array value */
-NorArray.prototype.valueOf = function() {
-	return this.a;
-};
-
-/** The forEach implementation
- * @param c {function} The callback which will be executed for each element in the array
- */
-NorArray.prototype.forEach = function nor_array_forEach(c) {
-	var a = this.a;
-	var l = a.length-1, i = l, ii = 0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		c(a[ii], ii, a);
-	}
-	return this;
-};
-
-/** The map implementation
- * @param c {function} The callback which will be executed for each element in the array
- */
-NorArray.prototype.map = function nor_array_map(c) {
-	var a = this.a;
-	var a2 = new Array(a.length);
-	var l = a.length-1, i = l, ii = 0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		a2[ii] = c(a[ii], ii, a);
-	}
-	return nor_array_obj(a2);
-};
-
-/** The filter() method creates new array with all the elements that pass the test implemented by the provided function.
- * @param c {function} The callback which will be executed for each element in the array
- * @returns {object} The nor-array object instance with value of results as its internal value.
- */
-NorArray.prototype.filter = function nor_array_filter(c) {
-	var a = this.a;
-	var a2 = new Array(a.length);
-	var l = a.length-1, i = l, ii = 0, n=0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		if(c(a[ii], ii, a)) {
-			a2[n++] = a[ii];
-		}
-	}
-	a2.length = n;
-	return nor_array_obj(a2);
-};
-
-/** The `find()` method returns a value in the array, if an element in the array 
- * satisfies the provided testing function. Otherwise `undefined` is returned.
- * @param c {function} The callback which will be executed for each element in the array
- * @returns {boolean} True if each array element passes the test.
- */
-NorArray.prototype.find = function nor_array_find(c) {
-	var a = this.a;
-	var l = a.length-1, i = l, ii = 0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		if(c(a[ii], ii, a)) {
-			return a[ii];
-		}
-	}
-};
-
-/** The `findIndex()` method returns an index in the array, if an element in the array 
- * satisfies the provided testing function. Otherwise `-1` is returned.
- * @param c {function} The callback which will be executed for each element in the array
- * @returns {boolean} True if each array element passes the test.
- */
-NorArray.prototype.findIndex = function nor_array_find(c) {
-	var a = this.a;
-	var l = a.length-1, i = l, ii = 0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		if(c(a[ii], ii, a)) {
-			return ii;
-		}
-	}
-	return -1;
-};
-
-/** The every() method tests every element in an array with provided callback function.
- * @param c {function} The callback which will be executed for each element in the array
- * @returns {boolean} True if each array element passes the test.
- */
-NorArray.prototype.every = function nor_array_every(c) {
-	var a = this.a;
-	var l = a.length-1, i = l, ii = 0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		if(!c(a[ii], ii, a)) {
-			return false;
-		}
-	}
-	return true;
-};
-
-/** The some() method tests if some elements in an array with provided callback function returns true
- * @param c {function} The callback which will be executed for each element in the array
- * @returns {boolean} True if each array element passes the test.
- */
-NorArray.prototype.some = function nor_array_some(c) {
-	var a = this.a;
-	var l = a.length-1, i = l, ii = 0;
-	while(i >= 0) {
-		/*jshint plusplus:false*/
-		ii = l-(i--);
-		if(c(a[ii], ii, a)) {
-			return true;
-		}
-	}
-	return false;
-};
-
-/** The concat() implementation. Currently this is using the standard implementation until better is implemented.
- * @param c {function} The callback which will be executed for each element in the array
- */
-NorArray.prototype.concat = function() {
-	var a = this.a;
-	return nor_array_obj( FUNCTION(a.concat).apply(a, arguments));
-};
-
-/** 
- * @param e {mixed} The element to search
- * @param from {number} The index to start the search 
- * @returns {number} The index of the element
- */
-NorArray.prototype.indexOf = function nor_array_indexOf() {
-	var a = this.a;
-	return FUNCTION(a.indexOf).apply(a, arguments);
-};
-
-/** 
- * @param e {mixed} The element to search
- * @param from {number} The index to start the search 
- * @returns {number} The index of the element
- */
-NorArray.prototype.lastIndexOf = function nor_array_lastIndexOf() {
-	var a = this.a;
-	return FUNCTION(a.lastIndexOf).apply(a, arguments);
-};
-
-/** 
- * @param e {mixed} The element to search
- * @param from {number} The index to start the search 
- * @returns {number} The index of the element
- */
-NorArray.prototype.join = function nor_array_join(s) {
-	var a = this.a;
-	if(arguments.length === 0) {
-		s = ',';
-	}
-	return a.join(s);
-};
-
-/**
- * @param e {mixed} The element to search
- * @param from {number} The index to start the search 
- * @returns {number} The index of the element
- */
-NorArray.prototype.reduce = function nor_array_reduce() {
-	var a = this.a;
-	return FUNCTION(a.reduce).apply(a, arguments);
-};
-
-/* EOF */
