@@ -3,21 +3,27 @@
  * Copyright 2014 Jaakko-Heikki Heusala <jheusala@iki.fi>
  */
 
-var assert = require("assert");
+import assert from "assert";
 
-var TIMEOUT = parseInt( process.env.TEST_TIMEOUT || 15*60000, 10);
+/**
+ *
+ * @type {number}
+ */
+const TIMEOUT = parseInt( process.env.TEST_TIMEOUT || 15*60000, 10);
 
-/** The amount of loops done for performance tests */
-var test_loops = parseInt( process.env.TEST_LOOPS || 1000000, 10);
+/** The amount of loops done for performance tests
+ * @type {number}
+ */
+const test_loops = parseInt( process.env.TEST_LOOPS || 10000000, 10);
 
-var IMPL = process.env.TEST_ARRAY_IMPL || 'index';
+/**
+ *
+ * @type {string}
+ */
+const IMPL = 'index';
 
 // Exports
-var ARR = require('../dist/impls/' + IMPL );
-
-if (ARR.default) {
-	ARR = ARR.default;
-}
+import ARR from '../../dist/index.js';
 
 /** Runs callback `loops` times and calculates the total time
  * @param loops {integer} The amount of loops
@@ -83,32 +89,33 @@ describe('nor-array', function(){
 
 			this.timeout(TIMEOUT);
 
-			var a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+			const a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 			// Standard implementation
-			var std_time = timer_test(test_loops, function() {
-				var b = [];
-				a.forEach(function(v) {
+			const std_time = timer_test(test_loops, () => {
+				const b = [];
+				a.forEach(v => {
 					b.push(v);
 				});
 				assert.strictEqual( a.length, b.length );
 			});
 
 			// Our implementation
-			var A = ARR(a);
-			var our_time = timer_test(test_loops, function() {
-				var b = [];
-				A.forEach(function(v) {
+			const A = ARR(a);
+			const our_time = timer_test(test_loops, () => {
+				const b = [];
+				A.forEach((v) => {
 					b.push(v);
 				});
 				assert.strictEqual( a.length, b.length );
 			});
 
 			// Raw implementation
-			var raw_time = timer_test(test_loops, function() {
-				var b = [];
-				var i = 0, ll = a.length;
-				while(i<ll) {
+			const raw_time = timer_test(test_loops, () => {
+				const b = [];
+				const ll = a.length;
+				let i = 0;
+				while (i<ll) {
 					b.push(a[i]);
 					i += 1;
 				}
@@ -116,40 +123,40 @@ describe('nor-array', function(){
 			});
 
 			// Check results
-			var rows = [
+			const rows = [
 				['Implementation', 'test', 'ms/100k calls', 'total time', 'calls'],
 				[IMPL, 'std', (std_time/test_loops*100000), std_time, test_loops ],
 				[IMPL, 'our', (our_time/test_loops*100000), our_time, test_loops ],
 				[IMPL, 'raw', (raw_time/test_loops*100000), raw_time, test_loops ]
 			];
 
-			rows.forEach(function(r) {
-				console.log( r.map(function(c) { return '"' + c + '"'; }).join(',') );
+			rows.forEach(r => {
+				console.log( r.map(c => '"' + c + '"').join(',') );
 			});
 
 			// Our vs standard
-			if(our_time < std_time) {
+			if (our_time < std_time) {
 				console.log('Our forEach() was ' + Math.round( (std_time-our_time)/std_time * 100) + '% faster than standard! [' + our_time+'/'+std_time+']');
 			} else {
 				console.log('Standard forEach() was ' + Math.round( (our_time-std_time)/our_time * 100) + '% faster than our! [' + our_time+'/'+std_time+']');
 			}
 
 			// Raw vs standard
-			if(raw_time < std_time) {
+			if (raw_time < std_time) {
 				console.log('Raw forEach() was ' + Math.round( (std_time-raw_time)/std_time * 100) + '% faster than standard! [' + raw_time+'/'+std_time+']');
 			} else {
 				console.log('Standard forEach() was ' + Math.round( (raw_time-std_time)/raw_time * 100) + '% faster than raw! [' + raw_time+'/'+std_time+']');
 			}
 
 			// Our vs raw
-			if(our_time < raw_time) {
+			if (our_time < raw_time) {
 				console.log('Our forEach() was ' + Math.round( (raw_time-our_time)/raw_time * 100) + '% faster than raw! [' + our_time+'/'+raw_time+']');
 			} else {
 				console.log('Raw forEach() was ' + Math.round( (our_time-raw_time)/our_time * 100) + '% faster than our! [' + our_time+'/'+raw_time+']');
 			}
 
 			// Asserts
-			assert(our_time < std_time, "our_time ("+our_time+") is less than std_time ("+std_time+")");
+			assert(our_time < std_time, "our_time ("+our_time+") is slower than std_time ("+std_time+")");
 
 		});
 

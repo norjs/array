@@ -1,5 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/norjs/array.png?branch=master)](http://travis-ci.org/norjs/array)
 
+***Obsolete Notice:*** We're moving out of using @norjs/array (originally nor-array) since newest Node.js has a faster standard implementation than a raw while loop, now at 2019. (It wasn't very fast 2014.)
+
 @norjs/array
 ============
 
